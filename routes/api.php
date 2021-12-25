@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Api'], function () {
     Route::resource('products', 'Product\ProductController');
+    Route::resource('historics', 'Historic\HistoricController')->only('index');
 });

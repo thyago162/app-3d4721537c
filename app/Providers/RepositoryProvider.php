@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\Historic\HistoricInterface;
+use App\Repositories\Orm\Historic\HistoricRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Contracts\Product\ProductInterface;
 use App\Repositories\Orm\Product\ProductRepository;
@@ -26,5 +28,6 @@ class RepositoryProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(ProductInterface::class, ProductRepository::class);
+        $this->app->bind(HistoricInterface::class, HistoricRepository::class);
     }
 }
