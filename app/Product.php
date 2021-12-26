@@ -35,6 +35,15 @@ class Product extends Model
             return $query->paginate($per_page);
         }
 
-        return $query->get();
+        return $query->paginate(10);
+    }
+
+    public function scopeSearch($query, $search)
+    {
+        if ($search) {
+            $query->where('sku', 'like', '%' . $search . '%')
+                ->orWhere('name', 'like', '%' . $search . '%');
+        }
+        return $query;
     }
 }
