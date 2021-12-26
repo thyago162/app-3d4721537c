@@ -5,7 +5,6 @@ namespace App\Repositories\Orm\Product;
 use App\Http\Requests\Product\ProductRequest;
 use App\Product;
 use App\Repositories\Contracts\Product\ProductInterface;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class ProductRepository implements ProductInterface
@@ -18,9 +17,10 @@ class ProductRepository implements ProductInterface
     {
         try {
             $product = Product::orderBy('created_at', 'desc')
+                ->search(request('search'))
                 ->pagination(request('per_page'));
 
-            return response()->json(['product' => $product]);
+            return response()->json(['products' => $product]);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
 
@@ -50,12 +50,14 @@ class ProductRepository implements ProductInterface
     public function store(ProductRequest $request)
     {
         try {
-            $product = Product::create([
-                'name' => $request->name,
-                'sku' => $request->sku,
-                'initial_quantity' => $request->initial_quantity,
-                'price' => $request->price
-            ]);
+            $product = Product::updateOrCreate(
+                ['id' => $request->id],
+                [
+                    'name' => $request->name,
+                    'sku' => $request->sku,
+                    'initial_quantity' => $request->initial_quantity,
+                    'price' => $request->price
+                ]);
 
             return response()->json(['product' => $product]);
         } catch (\Exception $exception) {
@@ -91,10 +93,15 @@ class ProductRepository implements ProductInterface
     public function destroy($id)
     {
         try {
-            $product = Product::findOrFail($id);
-            $product->delete();
+            $products_ids = explode(',', $id);
+            $products_delete = [];
+            foreach ($products_ids as $product_id) {
+                $product = Product::findOrFail($product_id);
+                array_push($products_delete, $product);
+                $product->delete();
+            }
 
-            return response()->json(['product' => $product]);
+            return response()->json(['products' => $products_delete]);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
 

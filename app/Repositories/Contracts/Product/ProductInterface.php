@@ -42,8 +42,9 @@ interface ProductInterface
     /**
      * Remove one product
      *
-     * @param int $id
+     * @param $id
      * @return JsonResponse
      */
-    public function destroy(int $id);
+    public function destroy($id);
+
 }

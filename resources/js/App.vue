@@ -1,9 +1,14 @@
 <template>
-  <b-container fluid>
-    <b-row>
-      <b-col>
-        <router-view></router-view>
-      </b-col>
-    </b-row>
-  </b-container>
+  <div>
+    <Header />
+    <router-view></router-view>
+  </div>
 </template>
+
+<script>
+import Header from "./components/Header";
+export default {
+  name: 'app',
+  components: {Header}
+}
+</script>
