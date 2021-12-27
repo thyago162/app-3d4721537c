@@ -39,7 +39,7 @@
             <b-form-checkbox @change="selectProduct(row.item.id)"></b-form-checkbox>
           </template>
           <template v-slot:cell(actions)="row">
-            <b-button size="sm" variant="success">
+            <b-button size="sm" variant="success" @click="stockUpdate(row.item.sku)">
               <b-icon-box></b-icon-box>
             </b-button>
             <b-button size="sm" variant="info" @click="updateProduct(row.item)">
@@ -72,16 +72,18 @@
         {{ this.selected }}
       </b-col>
     </b-row>
-    <FormProduct :product="product" nome="Thyago"/>
+    <FormProduct :product="product" />
+    <FormStock :sku="sku" />
   </b-container>
 </template>
 
 <script>
 import FormProduct from "../components/products/FormProduct";
+import FormStock from "../components/Stock/FormStock";
 
 export default {
   name: "index",
-  components: {FormProduct},
+  components: {FormProduct, FormStock},
 
   created() {
     this.$store.dispatch(
@@ -104,7 +106,8 @@ export default {
       per_page: '',
       selected: '',
       product_checked: [],
-      product: {}
+      product: {},
+      sku: ''
     }
   },
   computed: {
@@ -157,9 +160,11 @@ export default {
     updateProduct(product) {
       this.product = product;
       this.$bvModal.show('form-product')
+    },
+    stockUpdate(sku) {
+      this.sku = sku;
+      this.$bvModal.show('form-stock')
     }
   }
-
-
 }
 </script>

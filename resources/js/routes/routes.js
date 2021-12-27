@@ -1,8 +1,13 @@
-import Index from '../pages/Index'
+import Product from '../pages/Product'
+import CurrentInventory from "../pages/CurrentInventory";
 
 export default [
     {
         path: '/',
-        component: Index,
+        component: Product,
+    },
+    {
+        path: '/movimentacao-estoque',
+        component: CurrentInventory
     }
 ]
