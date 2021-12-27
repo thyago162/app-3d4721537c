@@ -46,4 +46,12 @@ class Product extends Model
         }
         return $query;
     }
+
+    ################################################################################################################
+    ## GETTERS E MUTATORS
+    ################################################################################################################
+    public function setSkuAttribute($value)
+    {
+        $this->attributes['sku'] = strtoupper($value);
+    }
 }

@@ -18,6 +18,7 @@ class CreateHistoricsTable extends Migration
             $table->string('operation_type');
             $table->integer('operation_value');
             $table->integer('previous_balance');
+            $table->integer('current_inventory');
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
 

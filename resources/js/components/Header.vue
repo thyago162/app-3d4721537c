@@ -8,7 +8,7 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item to="/">Produtos</b-nav-item>
-          <b-nav-item href="#" >Histórico</b-nav-item>
+          <b-nav-item to="movimentacao-estoque" >Movimentação Estoque</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>

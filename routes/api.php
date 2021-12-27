@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Api'], function () {
     Route::resource('products', 'Product\ProductController');
-    Route::resource('historics', 'Historic\HistoricController')->only('index');
+    Route::resource('stock', 'Stock\StockController')->only('update');
+    Route::resource('stock-balance', 'Historic\HistoricController')->only('index');
 });
